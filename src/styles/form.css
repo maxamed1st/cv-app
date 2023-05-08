@@ -1,0 +1,12 @@
+@import '@picocss/pico';
+:root {
+    --font-size: 13px;
+   --spacing: 0;
+}
+form {
+    width: 40% !important;
+}
+legend {
+    color: red;
+    font-weight: bolder !important;
+}
