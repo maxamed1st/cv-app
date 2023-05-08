@@ -1,0 +1,16 @@
+@import '@picocss/pico';
+main h2 {
+    margin-bottom: 2rem;
+}
+main article {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+main div > div {
+    margin-bottom: 19px;
+}
+@media screen and (min-width: 992px) {
+    .resize {
+        height: 247px;
+    }    
+  }
