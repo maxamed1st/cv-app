@@ -1,22 +1,29 @@
-import { Component } from "react";
-import Form from "./components/form";
+import react, { Component } from "react";
+import Controller from "./components/display";
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       //Store user Information in an object
-      infoObj: {}
+      infoObj: {},
+      edit: true
     }
     this.updateInfoObj = this.updateInfoObj.bind(this);
   }
+  //toggle edit to either display the Form or present the CV
+  setEdit = () => this.setState({edit: !this.state.edit});
   updateInfoObj = function(key, ...value) {
+    //update infoObj with key and value
+    let currentInfo = this.state.infoObj;
+    currentInfo[key] = value;
     this.setState({
-      infoObj: this.state.infoObj[key] = value
+      infoObj: currentInfo
     });
   }
   submitHandlerCallback = function(userInfo) {
     //Extract information from argument and store it in state.infoObj
-    this.updateInfoObj('GeneralInfo', userInfo.name.value, userInfo.email.value, userInfo.phone.value);
+    this.updateInfoObj('generalInfo', userInfo.name.value, userInfo.email.value, userInfo.phone.value);
     this.updateInfoObj(
       'educ',
       userInfo.school.value,
@@ -37,12 +44,12 @@ class App extends Component {
     e.preventDefault();
     const userInfo = document.getElementsByTagName("input");
     this.submitHandlerCallback(userInfo);
-    console.log("submitted", this.state.infoObj);
+    this.setEdit();
   }
   render() {
     return (
       <div>
-        <Form handleSubmit={this.handleSubmit.bind(this)} />
+        <Controller edit={this.state.edit} info={this.state.infoObj} handleSubmit={this.handleSubmit.bind(this)} handleClick={this.setEdit.bind(this)}/>
       </div>
     )
   }
